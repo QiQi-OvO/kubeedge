@@ -258,6 +258,48 @@ type VisitorConfig struct {
 	// CustomizedProtocol represents a set of visitor config fields of bluetooth protocol.
 	// +optional
 	CustomizedProtocol *VisitorConfigCustomized `json:"customizedProtocol,omitempty"`
+	// PushMethod represents the protocol used to push data,
+	// please ensure that the mapper can access the destination address.
+	// +optional
+	PushMethod *VisitorPushMethod `json:"pushMethod,omitempty"`
+}
+
+type VisitorPushMethod struct {
+	// HTTP Push method configuration for http
+	// +optional
+	HTTP *PushMethodHTTP `json:"http,omitempty"`
+	// CustomizedProtocol configuration for customized push method
+	// +optional
+	CustomizedProtocol *VisitorConfigCustomized `json:"customizedProtocol,omitempty"`
+	// MQTT Push method configuration for mqtt
+	// +optional
+	MQTT *PushMethodMQTT `json:"mqtt,omitempty"`
+}
+
+type PushMethodHTTP struct {
+	// +optional
+	HostName string `json:"hostName,omitempty"`
+	// +optional
+	Port int64 `json:"port,omitempty"`
+	// +optional
+	RequestPath string `json:"requestPath,omitempty"`
+	// +optional
+	Timeout int64 `json:"timeout,omitempty"`
+}
+
+type PushMethodMQTT struct {
+	// broker address, like mqtt://127.0.0.1:1883
+	// +optional
+	Address string `json:"address,omitempty"`
+	// publish topic for mqtt
+	// +optional
+	Topic string `json:"topic,omitempty"`
+	// qos of mqtt publish param
+	// +optional
+	QoS int32 `json:"qos,omitempty"`
+	// Is the message retained
+	// +optional
+	Retained bool `json:"retained,omitempty"`
 }
 
 // Common visitor configurations for bluetooth protocol

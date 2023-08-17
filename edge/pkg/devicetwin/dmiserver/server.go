@@ -52,6 +52,7 @@ const (
 )
 
 type server struct {
+	pb.UnimplementedDeviceManagerServiceServer
 	limiter  *rate.Limiter
 	dmiCache *DMICache
 }

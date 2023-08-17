@@ -305,6 +305,57 @@ spec:
                       description: Define how frequent mapper will report the value.
                       format: int64
                       type: integer
+                    pushMethod:
+                      description: PushMethod represents the protocol used to push data,
+                        please ensure that the mapper can access the destination address
+                      type: object
+                      properties:
+                        http:
+                          description: Push method configuration for http
+                          type: object
+                          properties:
+                            hostName:
+                              description: host name for publish
+                              type: string
+                            port:
+                              description: port for publish
+                              type: integer
+                              format: int64
+                            requestPath:
+                              description: the URL path for the request, like /api/users
+                              type: string
+                            timeout:
+                              description: timeout configuration for http request
+                              format: int64
+                              type: integer
+                        mqtt:
+                          description: Push method config for mqtt
+                          type: object
+                          properties:
+                            address:
+                              description: broker address, like mqtt://127.0.0.1:1883
+                              type: string
+                            topic:
+                              description: publish topic for mqtt
+                              type: string
+                            qos:
+                              description: qos of mqtt publish param
+                              type: integer
+                              format: int32
+                            retained:
+                              description: Is the message retained
+                              type: boolean
+                        customizedProtocol:
+                          description: Configuration for customized push method
+                          properties:
+                            configData:
+                              description: Any config data
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            protocolName:
+                              description: Unique protocol name Required.
+                              type: string
+                          type: object
                   type: object
                 type: array
               protocol:

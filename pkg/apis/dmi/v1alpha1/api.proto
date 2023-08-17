@@ -377,6 +377,44 @@ message DevicePropertyVisitor {
     VisitorConfigBluetooth bluetooth = 7;
     // the visitor to collect the properties of the device of customized protocol.
     VisitorConfigCustomized customizedProtocol = 8;
+    // the visitor to report properties of the value.
+    VisitorConfigPushMethod pushMethod = 9;
+}
+
+// the visitor to report properties of the value.
+message VisitorConfigPushMethod{
+    // the visitor to report the properties of the device by customized method.
+    VisitorConfigCustomized customizedProtocol = 1;
+    // the visitor to report the properties of the device by http.
+    PushMethodHTTP http = 2;
+    // the visitor to report the properties of the device by mqtt.
+    PushMethodMQTT mqtt = 3;
+}
+
+// the visitor to report the properties of the device by mqtt
+message PushMethodMQTT{
+    // broker address, like mqtt://127.0.0.1:1883
+    string address = 1;
+    // publish topic for mqtt
+    string topic = 2;
+    // qos of mqtt publish param
+    int32 qos = 3;
+    // is the message retained
+    bool retained = 4;
+}
+
+
+
+// the visitor to report the properties of the device by http.
+message PushMethodHTTP{
+    // host name for publish
+    string hostName = 1;
+    // port for publish
+    int64 port = 2;
+    // the URL path for the request, like /api/users
+    string requestPath = 3;
+    // timeout configuration for http request
+    int64 timeout = 4;
 }
 
 // the visitor to collect the properties of the device of OPC UA.
